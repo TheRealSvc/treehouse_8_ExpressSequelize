@@ -32,7 +32,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   const err = new Error("Sorry! We couldn't find the page you were looking for");
@@ -51,6 +50,7 @@ app.use(function(err, req, res, next) {
       console.log(`An error happened with status ${err.status} and message ${err.message}`);
       return res.render('page-not-found', err);
   } else {
+     console.log(err);
       err.status = 500;
       err.message = 'something went wrong'
       console.log(`An error happened with status ${err.status} and message ${err.message}`);
