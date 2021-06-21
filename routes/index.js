@@ -62,10 +62,10 @@ router.post('/books/new', asyncHandler( async (req, res) => {
         res.redirect("/books");     
     } catch (error) {
     if(error.name === "SequelizeValidationError") {
-        console.log("SequelizeValidationError") ; 
-        res.render("new-book", { errors: error.errors })
+        console.log(error) ; 
+        res.render("form-error", { errors: error });
     } else {
-        console.log(" some error !") ; 
+        errHandler(404, "Page not found! Please try again.");
       throw error;
     }  
   }
@@ -92,7 +92,7 @@ router.post('/books/:id', asyncHandler(async (req, res) => {
         res.redirect('/');
       } catch(error) {
         if(error.name === "SequelizeValidationError") {
-          res.render("update-book", {book, errors: error.errors })
+          res.render("update-book", {book, errors: error});
         } else {
           errHandler(404, "Page not found! Please try again.");
         }
